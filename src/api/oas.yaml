@@ -1,0 +1,437 @@
+openapi: 3.0.0
+info:
+  title: Expense Caluculator API
+  version: 1.0.0
+  description: This API is about expense caluculator
+  contact:
+    email: bsa.naveenbabu@gmail.com
+    name: Naveen Bahunadham
+servers:
+  - url: /v1
+tags: 
+  - name: Expense Caluculator
+    description: This API helps for caluculating expense
+paths:
+  /create:
+    summary: This route helps to create new expense
+    post:
+      summary: Create New Expense
+      operationId: createExpense
+      x-eov-operation-handler: expense-controller
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseCreateRequest'
+        description: Expense Created
+      responses:
+        '201':
+          description: Expense Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /update/{id}/id:
+    summary: This route helps to update existing expense
+    post:
+      summary: Update Expense
+      operationId: updateExpense
+      x-eov-operation-handler: expense-controller
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseCreateRequest'
+        description: Expense Created
+      responses:
+        '201':
+          description: Expense Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /delete/{id}/id:
+    summary: This route helps to update existing expense
+    delete:
+      summary: Update Expense
+      operationId: deleteExpense
+      x-eov-operation-handler: expense-controller
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '201':
+          description: Expense Created
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /getallexpenses:
+    summary: This route helps to get all expenses
+    get:
+      summary: Get All Expense
+      operationId: getAllExpenses
+      x-eov-operation-handler: expense-controller
+      responses:
+        '201':
+          description: All Expenses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expenses'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /getallexpensesbyexpensetype:
+    summary: This route helps to get all expenses by given expense type
+    post:
+      summary: Get All Expense by Expense Type
+      operationId: getAllExpensesByExpenseType
+      x-eov-operation-handler: expense-controller
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseType'
+      responses:
+        '201':
+          description: All Expenses by Expense Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expenses'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /getallexpensesbyname:
+    summary: This route helps to get all expenses by given expense name
+    post:
+      summary: Get All Expense by Expense name
+      operationId: getAllExpenesByName
+      x-eov-operation-handler: expense-controller
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseName'
+      responses:
+        '201':
+          description: All Expenses by Expense Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expenses'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /addamount:
+    summary: This route helps to add new amount
+    post:
+      summary: Add New Amount
+      operationId: addAmount
+      x-eov-operation-handler: amount-controller
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AmountCreateRequest'
+        description: Amount Added
+      responses:
+        '201':
+          description: Amount Added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AmountCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /getamount:
+    summary: This route helps to get all expenses
+    get:
+      summary: Get Amount
+      operationId: getAmount
+      x-eov-operation-handler: amount-controller
+      responses:
+        '201':
+          description: All Amount
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Amount'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                type: object
+  
+  /gettotalamount:
+    summary: This route helps to get all expenses
+    get:
+      summary: Get Amount
+      operationId: getTotalAmount
+      x-eov-operation-handler: amount-controller
+      responses:
+        '201':
+          description: All Amount
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Amount'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '501':
+          description: Not implemented
+          content:
+            application/json:
+              schema:
+                type: object
+
+
+components: 
+  parameters:
+    id:
+      name: id
+      in: path
+      description: Expense Id
+      required: true
+      schema:
+        type: string
+
+  schemas:
+    ExpenseCreateRequest:
+      type: object
+      required:
+        - name
+        - expenseType
+        - amount
+        - date
+        - id
+      properties:
+        name:
+          type: string
+        expenseType:
+          type: string
+        amount:
+          type: number
+        date:
+          type: string
+          format: date
+        id:
+          type: string
+
+    ExpenseCreateResponse:
+      type: object
+      required:
+        - name
+        - expenseType
+        - amount
+        - date
+        - id
+      properties:
+        name:
+          type: string
+        expenseType:
+          type: string
+        amount:
+          type: number
+        date:
+          type: string
+          format: date
+        id:
+          type: string
+
+    ExpenseType:
+     type: object
+     required:
+      - expenseType
+     properties:
+      expenseType:
+        type: string
+
+    ExpenseName:
+     type: object
+     required:
+      - name
+     properties:
+      name:
+        type: string
+
+    Expenses: 
+      type: array
+      properties:
+        schema:
+          $ref: '#/components/schemas/ExpenseCreateResponse'
+
+    Amount :
+      type: array
+      properties:
+        schema:
+          $ref: '#/components/schemas/AmountCreateResponse'
+
+    AmountCreateRequest:
+      type: object
+      required:
+        - totalAmount
+        - date
+      properties:
+        totalAmount:
+          type: number
+        addedAmount:
+          type: number
+        date:
+          type: string
+          format: date
+
+    AmountCreateResponse:
+      type: object
+      required:
+        - totalAmount
+        - date
+      properties:
+        totalAmount:
+          type: number
+        addedAmount:
+          type: number
+        date:
+          type: string
+          format: date
+  responses:
+    BadRequest:
+        description: Bad request (400)
+        content:
+          application/json:
+            schema:
+              type: object
+    NotFound:
+      description: The specified resource was not found (404)
+      content:
+        application/json:
+          schema:
+            type: object
+    ClientError:
+      description: Generic response for the range of HTTP 4XX error codes
+      content:
+        application/json:
+          schema:
+            type: object
+    InternalServerError:
+      description: Internal Server Error (500)
+      content:
+        application/json:
+          schema:
+            type: object
